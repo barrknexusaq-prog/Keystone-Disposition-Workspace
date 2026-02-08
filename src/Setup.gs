@@ -189,6 +189,21 @@ function setupContractPipelineSheet_(ss) {
   sheet.setColumnWidth(22, 150);  // Disposition Manager
   sheet.setColumnWidth(23, 250);  // Notes
 
+  // Conditional formatting by Status (must be set BEFORE data validation)
+  addStatusConditionalFormatting_(sheet, 16);
+
+  // Currency formatting for money columns (ARV, Repair, Contract Price, Assignment Fee, Earnest Money)
+  var moneyColumns = [9, 10, 11, 12, 17];
+  moneyColumns.forEach(function(col) {
+    sheet.getRange(2, col, sheet.getMaxRows() - 1, 1).setNumberFormat('$#,##0');
+  });
+
+  // Date formatting
+  var dateColumns = [2, 19, 20];
+  dateColumns.forEach(function(col) {
+    sheet.getRange(2, col, sheet.getMaxRows() - 1, 1).setNumberFormat('MM/dd/yyyy');
+  });
+
   // Data validation: Status column
   var statusRange = sheet.getRange(2, 16, sheet.getMaxRows() - 1, 1);
   var statusRule = SpreadsheetApp.newDataValidation()
@@ -212,21 +227,6 @@ function setupContractPipelineSheet_(ss) {
     .setAllowInvalid(false)
     .build();
   sourceRange.setDataValidation(sourceRule);
-
-  // Currency formatting for money columns (ARV, Repair, Contract Price, Assignment Fee, Earnest Money)
-  var moneyColumns = [9, 10, 11, 12, 17];
-  moneyColumns.forEach(function(col) {
-    sheet.getRange(2, col, sheet.getMaxRows() - 1, 1).setNumberFormat('$#,##0');
-  });
-
-  // Date formatting
-  var dateColumns = [2, 19, 20];
-  dateColumns.forEach(function(col) {
-    sheet.getRange(2, col, sheet.getMaxRows() - 1, 1).setNumberFormat('MM/dd/yyyy');
-  });
-
-  // Conditional formatting by Status
-  addStatusConditionalFormatting_(sheet, 16);
 
   // Freeze header row
   sheet.setFrozenRows(1);
