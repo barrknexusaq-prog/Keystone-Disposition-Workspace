@@ -135,6 +135,11 @@ function setupContractPipelineSheet_(ss) {
   var sheet = ss.getSheetByName(CONFIG.SHEETS.CONTRACT_PIPELINE);
   if (!sheet) return;
 
+  // Clear existing validation and formatting so re-runs work cleanly
+  var fullRange = sheet.getRange(1, 1, sheet.getMaxRows(), sheet.getMaxColumns());
+  fullRange.clearDataValidations();
+  sheet.clearConditionalFormatRules();
+
   var headers = [
     'Source',
     'Date Added',
@@ -238,6 +243,11 @@ function setupLeadSheet_(ss) {
   var sheet = ss.getSheetByName(CONFIG.SHEETS.LEAD_SHEET);
   if (!sheet) return;
 
+  // Clear existing validation and formatting so re-runs work cleanly
+  var fullRange = sheet.getRange(1, 1, sheet.getMaxRows(), sheet.getMaxColumns());
+  fullRange.clearDataValidations();
+  sheet.clearConditionalFormatRules();
+
   var headers = [
     'Timestamp',
     'Property Address',
@@ -303,6 +313,11 @@ function setupLeadSheet_(ss) {
 function setupBuyerSheet_(ss) {
   var sheet = ss.getSheetByName(CONFIG.SHEETS.BUYER_SHEET);
   if (!sheet) return;
+
+  // Clear existing validation and formatting so re-runs work cleanly
+  var fullRange = sheet.getRange(1, 1, sheet.getMaxRows(), sheet.getMaxColumns());
+  fullRange.clearDataValidations();
+  sheet.clearConditionalFormatRules();
 
   var headers = [
     'Timestamp',
