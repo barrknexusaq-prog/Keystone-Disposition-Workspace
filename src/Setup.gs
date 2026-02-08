@@ -14,7 +14,7 @@
  * or from the custom menu.
  */
 function setupWorkspace() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
 
   // Rename the first sheet (default "Sheet1") to Contract Pipeline
   renameMainSheet_(ss);
@@ -77,14 +77,14 @@ function onOpen() {
  * Rename the default first sheet to Contract Pipeline.
  */
 function renameMainSheet_(ss) {
-  const sheets = ss.getSheets();
-  const first = sheets[0];
-  const name = first.getName();
+  var sheets = ss.getSheets();
+  var first = sheets[0];
+  var name = first.getName();
 
   // Only rename if it's a default name or not already Contract Pipeline
   if (name !== CONFIG.SHEETS.CONTRACT_PIPELINE) {
     // Check if a sheet named "Contract Pipeline" already exists
-    const existing = ss.getSheetByName(CONFIG.SHEETS.CONTRACT_PIPELINE);
+    var existing = ss.getSheetByName(CONFIG.SHEETS.CONTRACT_PIPELINE);
     if (existing && existing.getSheetId() !== first.getSheetId()) {
       // Already exists as a different sheet; leave the first sheet alone
       return;
@@ -97,7 +97,7 @@ function renameMainSheet_(ss) {
  * Create a sheet if it doesn't already exist.
  */
 function ensureSheet_(ss, name) {
-  let sheet = ss.getSheetByName(name);
+  var sheet = ss.getSheetByName(name);
   if (!sheet) {
     sheet = ss.insertSheet(name);
   }
@@ -108,7 +108,7 @@ function ensureSheet_(ss, name) {
  * Reorder sheets so Contract Pipeline is the first tab.
  */
 function reorderSheets_(ss) {
-  const desired = [
+  var desired = [
     CONFIG.SHEETS.CONTRACT_PIPELINE,
     CONFIG.SHEETS.LEAD_SHEET,
     CONFIG.SHEETS.BUYER_SHEET,
@@ -117,25 +117,25 @@ function reorderSheets_(ss) {
   ];
 
   desired.forEach(function(name, idx) {
-    const sheet = ss.getSheetByName(name);
-    if (sheet) {
-      ss.setActiveSheet(sheet);
+    var s = ss.getSheetByName(name);
+    if (s) {
+      ss.setActiveSheet(s);
       ss.moveActiveSheet(idx + 1);
     }
   });
 
   // Set Contract Pipeline as the active sheet
-  const pipeline = ss.getSheetByName(CONFIG.SHEETS.CONTRACT_PIPELINE);
+  var pipeline = ss.getSheetByName(CONFIG.SHEETS.CONTRACT_PIPELINE);
   if (pipeline) ss.setActiveSheet(pipeline);
 }
 
 // ── Contract Pipeline Sheet Setup ─────────────────────────────
 
 function setupContractPipelineSheet_(ss) {
-  const sheet = ss.getSheetByName(CONFIG.SHEETS.CONTRACT_PIPELINE);
+  var sheet = ss.getSheetByName(CONFIG.SHEETS.CONTRACT_PIPELINE);
   if (!sheet) return;
 
-  const headers = [
+  var headers = [
     'Source',
     'Date Added',
     'Property Address',
@@ -235,10 +235,10 @@ function setupContractPipelineSheet_(ss) {
 // ── Lead Sheet Setup ──────────────────────────────────────────
 
 function setupLeadSheet_(ss) {
-  const sheet = ss.getSheetByName(CONFIG.SHEETS.LEAD_SHEET);
+  var sheet = ss.getSheetByName(CONFIG.SHEETS.LEAD_SHEET);
   if (!sheet) return;
 
-  const headers = [
+  var headers = [
     'Timestamp',
     'Property Address',
     'City',
@@ -301,10 +301,10 @@ function setupLeadSheet_(ss) {
 // ── Buyer Sheet Setup ─────────────────────────────────────────
 
 function setupBuyerSheet_(ss) {
-  const sheet = ss.getSheetByName(CONFIG.SHEETS.BUYER_SHEET);
+  var sheet = ss.getSheetByName(CONFIG.SHEETS.BUYER_SHEET);
   if (!sheet) return;
 
-  const headers = [
+  var headers = [
     'Timestamp',
     'Buyer Name',
     'Company',
@@ -368,7 +368,7 @@ function setupBuyerSheet_(ss) {
 // ── KPI Dashboard Sheet Setup ─────────────────────────────────
 
 function setupKPIDashboardSheet_(ss) {
-  const sheet = ss.getSheetByName(CONFIG.SHEETS.KPI_DASHBOARD);
+  var sheet = ss.getSheetByName(CONFIG.SHEETS.KPI_DASHBOARD);
   if (!sheet) return;
 
   // Clear any existing content

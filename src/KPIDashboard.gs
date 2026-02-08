@@ -102,7 +102,7 @@ function sendWeeklyKPIDigest() {
 
   // Build email body
   var body = 'KEYSTONE DISPOSITION WORKSPACE — WEEKLY KPI REPORT\n';
-  body += '=' .repeat(55) + '\n';
+  body += Array(56).join('=') + '\n';
   body += 'Generated: ' + new Date().toLocaleDateString() + '\n\n';
 
   for (var label in summary) {
@@ -117,7 +117,7 @@ function sendWeeklyKPIDigest() {
     body += label + ': ' + value + '\n';
   }
 
-  body += '\n' + '=' .repeat(55);
+  body += '\n' + Array(56).join('=');
   body += '\nView full dashboard: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl();
 
   // Recipients — update this list

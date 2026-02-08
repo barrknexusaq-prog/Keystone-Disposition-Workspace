@@ -80,7 +80,8 @@ function buildPipelineRowFromLead_(leadRow) {
   var cols = CONFIG.LEAD_COLUMNS;
   var pCols = CONFIG.CONTRACT_PIPELINE_COLUMNS;
 
-  var pipelineRow = new Array(23).fill('');
+  var pipelineRow = [];
+  for (var x = 0; x < 23; x++) pipelineRow.push('');
 
   pipelineRow[pCols.SOURCE] = 'Lead Sheet';
   pipelineRow[pCols.DATE_ADDED] = new Date();
@@ -170,7 +171,8 @@ function buildPipelineRowFromAcquisition_(acqRow) {
   var aCols = CONFIG.ACQUISITION_COLUMNS;
   var pCols = CONFIG.CONTRACT_PIPELINE_COLUMNS;
 
-  var pipelineRow = new Array(23).fill('');
+  var pipelineRow = [];
+  for (var x = 0; x < 23; x++) pipelineRow.push('');
 
   pipelineRow[pCols.SOURCE] = 'Acquisition';
   pipelineRow[pCols.DATE_ADDED] = new Date();

@@ -13,10 +13,10 @@
  *   https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}/edit
  */
 
-const CONFIG = {
+var CONFIG = {
   // ── Spreadsheet IDs ───────────────────────────────────────
   DISPO_WORKSPACE_ID: '1swI3l9sb7wKLyDRBrIwAdkscN5sU_4nF2tbCNNeMd90',
-  ACQUISITION_WORKSPACE_ID: 'PASTE_ACQUISITION_SPREADSHEET_ID_HERE',
+  ACQUISITION_WORKSPACE_ID: '1VZl6IvUpFX04LpsiXRGXWPui6hTV7pEqPDctkG0rxg4',
 
   // ── Sheet Names (Disposition Workspace) ───────────────────
   SHEETS: {
