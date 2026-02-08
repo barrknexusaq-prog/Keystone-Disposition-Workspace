@@ -24,6 +24,7 @@ const CONFIG = {
     LEAD_SHEET: 'Lead Sheet',
     BUYER_SHEET: 'Buyer Sheet',
     KPI_DASHBOARD: 'KPI Dashboard',
+    KPI_YEARLY_TRACKER: 'KPI Yearly Tracker',
   },
 
   // ── Sheet Names (Acquisition Workspace) ───────────────────

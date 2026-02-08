@@ -16,21 +16,41 @@
  */
 
 /**
- * Refresh the KPI Dashboard.
- * Updates the timestamp and forces SpreadsheetApp to recalculate.
+ * Refresh the KPI Dashboard and Yearly Tracker.
+ * Updates timestamps and forces SpreadsheetApp to recalculate.
+ * The monthly KPIs auto-roll to the current month via
+ * TODAY()-based formulas — no manual intervention needed.
  */
 function refreshKPIDashboard() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var kpiSheet = ss.getSheetByName(CONFIG.SHEETS.KPI_DASHBOARD);
-  if (!kpiSheet) return;
 
-  // Update "Last Updated" timestamp (row 2, col 3)
-  kpiSheet.getRange('C2').setValue(new Date()).setNumberFormat('MM/dd/yyyy hh:mm AM/PM');
+  // Update KPI Dashboard timestamp
+  var kpiSheet = ss.getSheetByName(CONFIG.SHEETS.KPI_DASHBOARD);
+  if (kpiSheet) {
+    kpiSheet.getRange('C2').setValue(new Date()).setNumberFormat('MM/dd/yyyy hh:mm AM/PM');
+  }
+
+  // Update Yearly Tracker timestamp
+  var yearlySheet = ss.getSheetByName(CONFIG.SHEETS.KPI_YEARLY_TRACKER);
+  if (yearlySheet) {
+    yearlySheet.getRange('M2').setValue(new Date()).setNumberFormat('MM/dd/yyyy');
+  }
 
   // Force recalculation by flushing
   SpreadsheetApp.flush();
 
-  Logger.log('refreshKPIDashboard: Dashboard refreshed at ' + new Date());
+  Logger.log('refreshKPIDashboard: Dashboard + Yearly Tracker refreshed at ' + new Date());
+}
+
+/**
+ * Navigate to the KPI Yearly Tracker sheet.
+ */
+function goToYearlyTracker() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName(CONFIG.SHEETS.KPI_YEARLY_TRACKER);
+  if (sheet) {
+    ss.setActiveSheet(sheet);
+  }
 }
 
 /**
